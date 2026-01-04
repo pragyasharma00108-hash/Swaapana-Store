@@ -1,0 +1,24 @@
+{
+  "name": "swaapana-store-api",
+  "version": "1.0.0",
+  "description": "API for storing business details, category, and store customization data",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js"
+  },
+  "keywords": [
+    "firebase",
+    "store",
+    "api"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^4.22.1",
+    "firebase-admin": "^12.7.0",
+    "uuid": "^9.0.1"
+  }
+}
