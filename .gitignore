@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+
+# Environment variables
+.env
+
+# Firebase service account key (IMPORTANT: Never commit this!)
+*-firebase-adminsdk-*.json
+serviceAccountKey.json
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+
+# Vercel
+.vercel/
+
