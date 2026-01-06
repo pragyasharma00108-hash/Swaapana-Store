@@ -63,7 +63,74 @@ const createStore = async (req, res) => {
   }
 };
 
+/**
+ * Get a store by ID
+ * GET /api/store/:storeId
+ */
+const getStoreById = async (req, res) => {
+  try {
+    const { storeId } = req.params;
+
+    // Get store document from Firestore
+    const storeDoc = await db.collection('stores').doc(storeId).get();
+
+    if (!storeDoc.exists) {
+      return res.status(404).json({
+        success: false,
+        message: 'Store not found'
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: 'Store retrieved successfully',
+      data: storeDoc.data()
+    });
+
+  } catch (error) {
+    console.error('Error getting store:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to get store',
+      error: error.message
+    });
+  }
+};
+
+/**
+ * Get all stores
+ * GET /api/stores
+ */
+const getAllStores = async (req, res) => {
+  try {
+    // Get all stores from Firestore
+    const storesSnapshot = await db.collection('stores').orderBy('createdAt', 'desc').get();
+
+    const stores = [];
+    storesSnapshot.forEach((doc) => {
+      stores.push(doc.data());
+    });
+
+    res.status(200).json({
+      success: true,
+      message: 'Stores retrieved successfully',
+      count: stores.length,
+      data: stores
+    });
+
+  } catch (error) {
+    console.error('Error getting stores:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to get stores',
+      error: error.message
+    });
+  }
+};
+
 module.exports = {
-  createStore
+  createStore,
+  getStoreById,
+  getAllStores
 };
 
